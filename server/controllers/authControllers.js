@@ -32,6 +32,7 @@ const register = async (req, res) => {
     res.status(StatusCodes.CREATED).json({ tokenUser })
 }
 
+
 module.exports = {
     register
 }

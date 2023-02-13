@@ -10,6 +10,12 @@ const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
 
+// Configuration for CORS
+const corsOptions = {
+    origin: "http://localhost:5173", 
+    optionsSuccessStatus: 200 
+};
+
 //database
 const connectDB = require('./db/connect')
 
@@ -18,11 +24,14 @@ const authRouter = require('./routes/authRoutes')
 // Express Middleware
 app.use(express.json());
 
+// Use cors middleware
+app.use(cors(corsOptions));
+
 // Suppress the deprecation warning
 mongoose.set('strictQuery', false)
 
 //home route
-app.get('/', (req,res) => {
+app.get('/', (req, res) => {
     res.send('<h1>Welcome To the API</h1>')
 })
 
@@ -40,10 +49,10 @@ app.use('/api/v1/auth', authRouter)
 
 
 const start = async () => {
-    try{
+    try {
         await connectDB(process.env.MONGO_URL)
         app.listen(PORT, console.log(`Server in listening on port ${PORT}...`))
-    } catch(error){
+    } catch (error) {
         console.log(error)
     }
 }

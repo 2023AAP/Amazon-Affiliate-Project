@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const validator = require('validator')
-const bcrypt = require('bcrypt')
+const validator = require('validator');
+const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -19,17 +19,6 @@ const UserSchema = new mongoose.Schema({
         required: [true, 'Please Provide Password'],
         minlength: 6,
     },
-    confirmPassword: {
-        type: String,
-        required: [true, 'Please Provide Password'],
-        minlength: 6,
-        validate: {
-            validator: function (value) {
-                return value === this.password;
-            },
-            message: 'Password and Confirm Password must match'
-        }
-    },
     role: {
         type: String,
         enum: ['admin', 'user', 'creator'],
@@ -46,15 +35,29 @@ const UserSchema = new mongoose.Schema({
     },
 }, { timestamps: true });
 
-// Hash Password
-UserSchema.pre('save', async function () {
 
-    // don't hash the password again if its not modified
-    if (!this.isModified('password') || !this.isModified('confirmPassword')) return;
+// Hash password before saving it to the database
+UserSchema.pre("save", async function (next) {
+    const user = this;
 
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    this.confirmPassword = await bcrypt.hash(this.confirmPassword, salt);
+    if (!user.isModified("password")) {
+        return next();
+    }
+
+    try {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(user.password, salt);
+        user.password = hash;
+        next();
+    } catch (error) {
+        next(error);
+    }
 });
+
+// Password Comparison when login
+UserSchema.methods.comparePassword = async function (candidatePassword){
+    const isMatch = await bcrypt.compare(candidatePassword, this.password);
+    return isMatch
+}
 
 module.exports = mongoose.model("User", UserSchema);

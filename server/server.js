@@ -20,6 +20,7 @@ const corsOptions = {
 const connectDB = require('./db/connect')
 
 const authRouter = require('./routes/authRoutes')
+const productRouter = require('./routes/productRoutes')
 
 // Express Middleware
 app.use(express.json());
@@ -46,6 +47,7 @@ app.use(cookieParser(process.env.JWT_SECRET));
 
 // routes
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/product', productRouter)
 
 
 const start = async () => {

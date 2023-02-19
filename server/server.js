@@ -1,5 +1,6 @@
 require('dotenv').config();
 const multer = require('multer');
+const path = require('path');
 
 const express = require('express');
 const mongoose = require("mongoose")
@@ -36,6 +37,8 @@ mongoose.set('strictQuery', false)
 app.get('/', (req, res) => {
     res.send('<h1>Welcome To the API</h1>')
 })
+
+app.use('/img', express.static(path.join(__dirname, 'img')));
 
 // Print URL Request from client
 app.use((req, res, next) => {

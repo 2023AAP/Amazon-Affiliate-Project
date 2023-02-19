@@ -1,48 +1,41 @@
-const User = require('../models/User');
-const { StatusCodes } = require('http-status-codes');
-const Product = require('../models/Product');
-
-const multer = require('multer');
+const { StatusCodes } = require('http-status-codes')
+const multer = require('multer')
+const Product = require('../models/Product')
 
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/') // the folder where the image will be saved
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname) // the name of the file in the folder
-  }
+
+    destination: (req, file, callback) => {
+        callback(null, 'img/products')
+    },
+
+    filename: (req, file, callback) => {
+        const extension = file.mimetype.split('/')[1];
+        callback(null, `product-${file.originalname.split('.')[0]}-${Date.now()}.${extension}`)
+    }
 });
 
-const upload = multer({ storage: storage });
+
+const fileFilter = (req, file, callback) => {
+
+    if (file.mimetype.startsWith('image')) callback(null, true);
+    else callback(new AppError('Please upload an Image', 400), false);
+}
+
+const upload = multer({ storage, fileFilter });
+
+const uploadAnything = upload.any();
 
 const createProduct = async (req, res) => {
 
-    upload.single('image')(req, res, async function (err) {
-        if (err instanceof multer.MulterError) {
-            // A Multer error occurred when uploading.
-            return res.status(StatusCodes.BAD_REQUEST).json({
-                success: false,
-                message: 'Error uploading image'
-            });
-        } else if (err) {
-            // An unknown error occurred when uploading.
-            return res.status(StatusCodes.BAD_REQUEST).json({
-                success: false,
-                message: 'Error uploading image'
-            });
-        }
+    const file = req.files[0];
+    req.body.image = file.filename;
+    const product = await Product.create(req.body)
 
-        // The file was uploaded successfully.
-        const product = await Product.create({
-            ...req.body,
-            image: req.file.filename // the name of the file in the folder
-        });
-
-        res.status(StatusCodes.CREATED).json({
-            success: true,
-            data: product,
-        });
+    res.status(StatusCodes.CREATED).json({
+        success: true,
+        data: req.body,
     });
+
 }
 
 const getAllProducts = async (req, res) => {
@@ -51,5 +44,5 @@ const getAllProducts = async (req, res) => {
 }
 
 module.exports = {
-    createProduct, getAllProducts
+    createProduct, getAllProducts, uploadAnything
 }

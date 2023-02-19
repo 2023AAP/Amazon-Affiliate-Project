@@ -21,6 +21,10 @@ const ProductSchema = new mongoose.Schema({
         type: [String],
         // required: true,
     },
+    sales: {
+        type: Number,
+        required: true,
+    },
     features: {
         type: String,
         required: [true, 'Please provide product Features'],

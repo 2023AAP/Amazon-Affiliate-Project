@@ -4,24 +4,24 @@ const Product = require('../models/Product')
 
 const storage = multer.diskStorage({
 
-    destination : (req, file , callback) => {
-      callback(null , 'img/products')
-    }, 
+    destination: (req, file, callback) => {
+        callback(null, 'img/products')
+    },
 
-    filename : (req , file , callback) => {
-      const extension = file.mimetype.split('/')[1];
-      callback(null , `product-${file.originalname.split('.')[0]}-${Date.now()}.${extension}`)
+    filename: (req, file, callback) => {
+        const extension = file.mimetype.split('/')[1];
+        callback(null, `product-${file.originalname.split('.')[0]}-${Date.now()}.${extension}`)
     }
 });
 
 
-const fileFilter = (req , file , callback) => {
+const fileFilter = (req, file, callback) => {
 
-    if(file.mimetype.startsWith('image')) callback(null , true);
-    else callback(new AppError('Please upload an Image', 400) , false);
+    if (file.mimetype.startsWith('image')) callback(null, true);
+    else callback(new AppError('Please upload an Image', 400), false);
 }
 
-const upload = multer({storage , fileFilter});
+const upload = multer({ storage, fileFilter });
 
 const uploadAnything = upload.any();
 
@@ -44,5 +44,5 @@ const getAllProducts = async (req, res) => {
 }
 
 module.exports = {
-    createProduct, getAllProducts  , uploadAnything
+    createProduct, getAllProducts, uploadAnything
 }

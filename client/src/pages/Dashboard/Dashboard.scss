@@ -11,10 +11,11 @@
 
     .dash-flex{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
 
         .left{
+            width: 640px;
             padding: 1rem;
             width: 50%;
 
@@ -28,8 +29,8 @@
                 margin: 0 0.5rem;
 
                 h3{
-                    background-color: yellow;
-                    padding: 0.5rem ;
+                    // background-color: yellow;
+                    padding: 0.5rem 0;
                 }
 
                 div{
@@ -46,7 +47,7 @@
 
                     textarea{
                         cursor: pointer;
-                        height: 80px;
+                        height: 60px;
                         padding: 0 5px;
                     }
 

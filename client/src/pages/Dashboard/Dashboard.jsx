@@ -3,9 +3,11 @@ import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.scss';
 import axios from "axios";
+import AllProducts from './AllProducts/AllProducts';
 
 const Dashboard = () => {
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("");
   const [file, setFile] = useState(null);
   const [sales, setSales] = useState(100);
   const [rating, setRating] = useState(5);
@@ -30,6 +32,7 @@ const Dashboard = () => {
 
     const data = new FormData();
     data.append('title', title);
+    data.append('category', category);
     data.append('file', file);
     data.append('sales', sales);
     data.append('rating', rating);
@@ -80,6 +83,12 @@ const Dashboard = () => {
             <div>
               <label htmlFor="file">Image:</label>
               <input type="file" id="file" accept="image/*" onChange={handleFileChange} />
+            </div>
+
+            {/* Category */}
+            <div>
+              <label htmlFor="category">Category:</label>
+              <input type="text" id="category" value={category} onChange={(event) => setCategory(event.target.value)} />
             </div>
 
             {/* COlors */}
@@ -160,8 +169,10 @@ const Dashboard = () => {
           </form>
         </div>
 
-
-        <div className="right">b</div>
+        {/* All Products */}
+        <div className="right">
+          <AllProducts />
+        </div>
       </div>
     </div>
   )

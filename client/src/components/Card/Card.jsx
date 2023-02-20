@@ -22,7 +22,8 @@ const Card = ({ product }) => {
 
             {/* Image */}
             {/* <img src="https://media.cnn.com/api/v1/images/stellar/prod/allbirds-sneakers-review-wool-runnerjpg.jpg?q=h_1090,w_1938,x_0,y_0" alt="" /> */}
-            <img src={product.image} alt="" />
+            {/* <img src={product.image} alt="" /> */}
+            <img src={`http://localhost:3000/img/products/${product.image}`} alt="" />
 
             {/* Bottom Info */}
             <div className="bottom">

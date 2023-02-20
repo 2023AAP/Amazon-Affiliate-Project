@@ -1,0 +1,61 @@
+@import '../../../_variable';
+
+.allproduct {
+    width: 640px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    .all{
+        width: 100%;
+
+        .all_row{
+            margin: 0.3rem 1rem;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background-color: azure;
+            font-size: 1rem;
+            font-weight: 600;
+
+            .checkbox{
+                width: 10%;
+            
+                input{
+                    cursor: pointer;
+                }
+            }
+
+            .image{
+                padding: 5px;
+                width: 20%;
+
+                img{
+                    width: 50px;
+                    height: 50px;
+                    object-fit: contain;
+                }
+            }
+
+            .title{
+                width: 40%;
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            .category{
+                width: 30%;
+            }
+        }
+
+        .selected{
+            background-color: rgb(200, 242, 255);
+        }
+    }
+
+    .product_image {
+        width: 50px;
+    }
+}

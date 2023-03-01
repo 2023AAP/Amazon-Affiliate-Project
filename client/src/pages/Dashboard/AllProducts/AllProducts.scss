@@ -1,11 +1,20 @@
 @import '../../../_variable';
 
 .allproduct {
-    width: 640px;
+    width: 1000px;
+    margin: 1rem auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    font-family: $alata;
+
+    h3{
+        margin: 1rem 0;
+        font-family: $lato;
+        font-size: 2rem;
+        color: $violet;
+    }
 
     .all{
         width: 100%;
@@ -16,7 +25,7 @@
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            background-color: azure;
+            background-color: #ece4f5;
             font-size: 1rem;
             font-weight: 600;
 
@@ -47,6 +56,8 @@
 
             .category{
                 width: 30%;
+                display: flex;
+                justify-content: flex-start;
             }
         }
 

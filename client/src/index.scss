@@ -1,5 +1,4 @@
 @import "./_variable";
-// Poppins
 
 
 * {
@@ -15,8 +14,37 @@ body{
     // background-repeat: no-repeat;
 }
 
+button{
+    border: none;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+Link{
+    color: inherit;
+    font-family: inherit;
+}
+
+// Inputs
+
 input:focus{
     outline: none;
     // border: none;
     background-color: white;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #691ba1 !important;
+    color: white !important;
+    border-color: #691ba1 !important;
+  }
+  
+
+// Utility
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
 }

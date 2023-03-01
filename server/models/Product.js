@@ -25,9 +25,13 @@ const ProductSchema = new mongoose.Schema({
         type: [String],
         // required: true,
     },
+    url:{
+        type: String,
+        required: true,
+    },
     sales: {
         type: Number,
-        required: true,
+        required:[true, 'Please provide url'],
     },
     features: {
         type: String,

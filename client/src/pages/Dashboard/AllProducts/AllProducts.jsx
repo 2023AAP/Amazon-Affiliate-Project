@@ -28,9 +28,10 @@ const AllProducts = () => {
             .catch(error => console.log(error));
     }, []);
 
+
     return (
         <div className='allproduct'>
-            <h3>AllProducts</h3>
+            <h3>All Products</h3>
 
             <div className="all">
 

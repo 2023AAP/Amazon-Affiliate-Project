@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from "axios";
-import './CreateProduct.scss';
+import { Link } from 'react-router-dom';
+import '../CreateProduct/CreateProduct.scss';
+const UpdateProduct = (id) => {
+    console.log(id)
 
-const CreateProduct = () => {
+    const { productId } = useParams();
+
     const [title, setTitle] = useState("");
     const [url, setUrl] = useState("");
     const [category, setCategory] = useState("");
@@ -30,22 +34,46 @@ const CreateProduct = () => {
         event.preventDefault();
 
         const data = new FormData();
-        data.append('title', title);
-        data.append('url', url);
-        data.append('category', category);
-        data.append('file', file);
-        data.append('sales', sales);
-        data.append('rating', rating);
-        data.append('price', price);
-        data.append('features', features);
-        data.append('description', description);
-        data.append('details', details);
-        data.append('colors', selectedColors.join(","));
 
+        if (title) {
+            data.append('title', title);
+        }
+        if (url) {
+            data.append('url', url);
+        }
+        if (category) {
+            data.append('category', category);
+        }
+        if (file) {
+            data.append('file', file);
+        }
+        if (sales) {
+            data.append('sales', sales);
+        }
+        if (rating) {
+            data.append('rating', rating);
+        }
+        if (price) {
+            data.append('price', price);
+        }
+        if (selectedColors.length > 0) {
+            data.append('colors', selectedColors.join(","));
+        }
+        if (features) {
+            data.append('features', features);
+        }
+        if (description) {
+            data.append('description', description);
+        }
+        if (details) {
+            data.append('details', details);
+        }
+
+        console.log(`Product_id: ${id}`)
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/product/create', data);
+            const response = await axios.patch(`http://localhost:3000/api/v1/product/update/${id}`, data);
             console.log(response.data);
-            window.location.reload();
+            navigate("/dashboard")
         } catch (error) {
             console.error(error);
         }
@@ -66,7 +94,7 @@ const CreateProduct = () => {
             <div className="create_main">
 
                 <form onSubmit={handleSubmit}>
-                    <h3>Add Product</h3>
+                    <h3>Update Product{productId}</h3>
 
                     <div className="dash_form">
                         {/* Form left */}
@@ -171,11 +199,11 @@ const CreateProduct = () => {
                         </div>
                     </div>
 
-                    <button type="submit">Create Product</button>
+                    <button type="submit">Update Product</button>
                 </form>
             </div>
         </div>
     )
 }
 
-export default CreateProduct
+export default UpdateProduct

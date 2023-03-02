@@ -31,9 +31,12 @@
 
             .checkbox{
                 width: 10%;
-            
-                input{
-                    cursor: pointer;
+                cursor: pointer;
+                display: flex;
+                gap: 1rem;
+
+                span{
+                    color: $violet;
                 }
             }
 

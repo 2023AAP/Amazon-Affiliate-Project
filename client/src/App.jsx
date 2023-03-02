@@ -8,6 +8,7 @@ import SingleProduct from './pages/SingleProduct';
 import Layout from './components/Layout';
 import AllProducts from './pages/Dashboard/AllProducts/AllProducts';
 import CreateProduct from './pages/Dashboard/CreateProduct/CreateProduct';
+import UpdateProduct from './pages/Dashboard/UpdateProduct/UpdateProduct';
 
 const App = () => {
 
@@ -23,7 +24,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} >
           <Route path="/dashboard/" element={<AllProducts />} />
           <Route path="/dashboard/create" element={<CreateProduct />} />
-
+          <Route path="/dashboard/update/:id" element={<UpdateProduct />} />
         </Route>
 
       </Routes>

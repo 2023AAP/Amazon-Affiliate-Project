@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import UpdateProduct from '../UpdateProduct/UpdateProduct';
 import './AllProducts.scss'
 
 const AllProducts = () => {
@@ -10,28 +9,24 @@ const AllProducts = () => {
 
     const [selectedProducts, setSelectedProducts] = useState([]);
 
-    const handleCheckboxChange = (productId) => {
-        const selectedIndex = selectedProducts.indexOf(productId);
+    // const handleCheckboxChange = (productId) => {
+    //     const selectedIndex = selectedProducts.indexOf(productId);
 
-        console.log(productId)
+    //     console.log(`Selected Product: ${productId}`)
 
-        if (selectedIndex > -1) {
-            // Product is already selected, remove it
-            setSelectedProducts(selectedProducts.filter(id => id !== productId));
-        } else {
-            // Product is not selected, add it
-            setSelectedProducts([...selectedProducts, productId]);
-        }
+    //     if (selectedIndex > -1) {
+    //         // Product is already selected, remove it
+    //         setSelectedProducts(selectedProducts.filter(id => id !== productId));
+    //     } else {
+    //         // Product is not selected, add it
+    //         setSelectedProducts([...selectedProducts, productId]);
+    //     }
+    // }
 
-        // Check if the checkbox is now checked
-        const isChecked = selectedProducts.includes(productId);
-        if (!isChecked) {
-            navigate(`/dashboard/update/${productId}`, { state: { productId } });
-        }
-    }
-
-
-
+    // // Edit Product
+    // const handleEditClick = (productId) => {
+    //     navigate(`/dashboard/update/${productId}`);
+    // }
 
     useEffect(() => {
         fetch('http://localhost:3000/api/v1/product/getall')
@@ -64,11 +59,10 @@ const AllProducts = () => {
 
                 {products.map(product => (
                     <div className={`all_row ${selectedProducts.includes(product._id) ? "selected" : ""}`} key={product._id}>
-                        <div className="checkbox" onClick={()=> <UpdateProduct id={product._id}/>}>
+                        
+                        <div className="checkbox" >
                             <input
                                 type="checkbox"
-                                checked={selectedProducts.includes(product._id)}
-                                onChange={() => handleCheckboxChange(product._id)}
                             />
                         </div>
                         <div className='image'>

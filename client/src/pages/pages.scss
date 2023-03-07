@@ -1,0 +1,13 @@
+@import '../_variable';
+
+.home{
+    max-width: 1280px;
+    margin: 0 auto;
+
+    .products{
+        margin: 1rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        gap: 3rem;
+    }
+}

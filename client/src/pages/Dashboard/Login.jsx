@@ -39,32 +39,31 @@ const Login = () => {
   };
 
   return (
-    <form
-      className='flex flex-col gap-5 h-screen items-center justify-center mx-auto w-1/3'
-      onSubmit={handleSubmit}
-    >
-      <h1 className='my-10 text-3xl'>	Login </h1>
-      <div >
-        <input
-          className='border border-gray-300 bg-white py-2 px-4 rounded-md focus:bg-gray-100 active:border-gray-400'
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <input
-          className='border border-gray-300 bg-white py-2 px-4 rounded-md focus:bg-gray-100 active:border-gray-400'
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-      </div>
-      <button className='bg-blue-600 text-white px-5 py-1' type="submit">Login</button>
-      {error && <div className='bg-red-500 text-white font-sm py-1 px-5'>{error}</div>}
-    </form>
+    <div className="login">
+      <form
+        onSubmit={handleSubmit}
+      >
+        <h1 >	Login </h1>
+        <div >
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+          />
+        </div>
+        <div>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </div>
+        <button type="submit">Login</button>
+        {error && <div className='error'>{error}</div>}
+      </form>
+    </div>
   );
 };
 

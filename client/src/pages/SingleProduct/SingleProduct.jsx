@@ -35,7 +35,7 @@ const SingleProduct = () => {
                                 <div className="banner-cta v2">Shop Now</div>
                             </div>
                         </div>
-                        <img className="banner-img" src={product.image} />
+                        <img className="banner-img" src={`http://localhost:3000/img/products/${product.image}`} />
                     </div>
                 </div>
             )}

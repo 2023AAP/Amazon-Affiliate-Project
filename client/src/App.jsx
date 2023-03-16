@@ -2,9 +2,10 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './pages/Dashboard/Login';
 import Home from './pages/Home';
+import Products from './pages/Products/Products';
+import SingleProduct from './pages/SingleProduct/SingleProduct';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Category from './pages/Category';
-import SingleProduct from './pages/SingleProduct';
 import Layout from './components/Layout';
 import AllProducts from './pages/Dashboard/AllProducts/AllProducts';
 import CreateProduct from './pages/Dashboard/CreateProduct/CreateProduct';
@@ -19,7 +20,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/category" element={<Category />} />
-          <Route path="/product" element={<SingleProduct />} />
+          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<SingleProduct />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard />} >
           <Route path="/dashboard/" element={<AllProducts />} />

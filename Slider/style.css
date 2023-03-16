@@ -78,13 +78,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .arrow {
     width: 50px;
     height: 50px;
-    background-color: rgba(255, 255, 255, 0.5);
+    /* background-color: rgba(255, 255, 255, 0.5); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -99,8 +98,8 @@
 }
 
 .arrow i {
-    color: #333333;
-    font-size: 1.5rem;
+    color: #e0e0e0;
+    font-size: 3rem;
 }
 
 .arrow.disabled {
